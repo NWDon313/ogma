@@ -1,5 +1,10 @@
 import speech_recognition as sr
+from tts_watson.TtsWatson import TtsWatson
 
+
+# initiaze Watson text to Speech
+ttsWatson = TtsWatson('oskik313@gmail.com', 'MamNaImieOskar313.', 'en-US_AllisonVoice')
+ttsWatson.play("Hello World")
 
 
 # get audio from the microphone
