@@ -2,6 +2,7 @@ from pynput.keyboard import Key
 from pynput import keyboard
 import speech_recognition as sr
 import pyttsx3
+from commands import analyzeString
 
 # get audio from the microphone
 def voiceRecognizer():
@@ -16,10 +17,8 @@ def voiceRecognizer():
         xengine.runAndWait()
     try:
         command = r.recognize_google(audio)
+        analyzeString(command)
         print(command)
-        xengine.say('Hello '+ command)
-        xengine.runAndWait()
-
     except sr.UnknownValueError:
         print("Could not understand audio")
         xengine.say('Could you repeat that?. ')
@@ -30,13 +29,11 @@ def voiceRecognizer():
 # listen for button pressed
 def on_press(key):
     try:
-        print('alphanumeric key {0} pressed'.format(key.char))
-    except AttributeError:
-        print('special key {0} pressed'.format(key))
-        print(key)
         if key == Key.insert:
             print("so far so good")
             voiceRecognizer()
+    except AttributeError:
+       print("some error occured")
 
 
 #Key listener
